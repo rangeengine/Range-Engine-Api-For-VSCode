@@ -9,12 +9,12 @@ Describe specific features of your extension including screenshots of your exten
 
 For example if there is an image subfolder under your extension project workspace:
 
-\!\[Range Engine Api\]\(src/images/rangeapi.gif\)
+![Range Engine Api](images/rangeapi.gif)
+
+**Enjoy!**
 
 ## Release Notes
 
 ### 0.1.0
 
 Initial release.
-
-**Enjoy!**
