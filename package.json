@@ -2,7 +2,9 @@
   "name": "range-engine-api",
   "displayName": "Range Engine API",
   "description": "Range Engine Autocompletion for Visual Studio Code",
-  "version": "0.1.0",
+  "version": "0.1.1",
+  "publisher": "RangeEngine",
+  "icon": "images/icon.png",
   "engines": {
     "vscode": "^1.95.0"
   },
