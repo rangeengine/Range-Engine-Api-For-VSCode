@@ -2017,6 +2017,132 @@ class KX_LightObject(KX_GameObject):
 		self.spotsize = float()
 		self.spotblend = float()
 
+class KX_MeshBuilderSlot:
+	def __init__(self) -> None:
+		self.vertices = list()
+		self.indices = list()
+		self.triangleIndices = list()
+		self.material = KX_BlenderMaterial
+		self.uvCount = int()
+		self.colorCount = int()
+		self.primitive = list()
+
+	def addVertex(self, position, normal=(0, 0, 0), tangent=(0, 0, 0), uvs=((0, 0),), colors=(0, 0, 0, 0)) -> None:
+		"""
+		Create a Vertex.
+
+		Parameters:
+			position (tuple (x, y, z)) – Vertex position.
+
+			normal (tuple (x, y, z)) – Vertex normal.
+
+			tangent (tuple (x, y, z, w)) – Vertex tangent.
+
+			uvs (tuple ((x, y), (x, y), (x, y), (x, y), (x, y), (x, y), (x, y), (x, y))) – Vertex UVs. max 8 uvs.
+
+			colors (tuple ((x, y), (x, y), (x, y), (x, y), (x, y), (x, y), (x, y), (x, y))) – Vertex Colors. max 8 colors.
+		"""
+		...
+
+	def addIndex(self, index) -> None:
+		"""
+		Add the order of vertex indices to create a triangle, this function adds the primitive and the triangle index.
+
+		Parameters:
+			index (tuple (x, y, z)) – A indices for render one triangle.
+		"""
+		...
+
+	def removeVertex(self, start : int, end=-1) -> None:
+		"""
+		Remove Vertices from the mesh.
+
+		Parameters:
+			start (int) – Start indice for the vertex.
+
+			end (int) – End indice for the vertex.
+		"""
+		...
+
+	def addPrimitiveIndex(self, index) -> None:
+		"""
+		Add the order of vertex indices to create a primitive triangle.
+
+		Parameters:
+			index (tuple (x, y, z)) – A indices for render one triangle.
+		"""
+		...
+
+	def removePrimitiveIndex(self, start, end=-1) -> None:
+		"""
+		Remove the Primitive Vertices from the mesh.
+
+		Parameters:
+			start (int) – Start indice for the vertex.
+
+			end (int) – End indice for the vertex.
+		"""
+		...
+
+	def addTriangleIndex(self, index) -> None:
+		"""
+		Add the order of vertex indices to create a triangle.
+
+		Parameters:
+			index (tuple (x, y, z)) – A indices for render one triangle.
+		"""
+		...
+
+	def removeTriangleIndex(self, start, end=-1) -> None:
+		"""
+		Remove the Triangles from the mesh.
+
+		Parameters:
+			start (int) – Start indice for the vertex.
+
+			end (int) – End indice for the vertex.
+		"""
+		...
+	
+	def recalculateNormals(self) -> None:
+		"""
+		It recalculates the mesh norms, it is not necessary to use it if you have specified the vertex normal in addVertex().
+		"""
+		...
+	
+class KX_MeshBuilder:
+	"""
+	allows you to create meshes in real time.
+	"""
+	def __init__(self, meshName : str, KX_Scene, uvs : list):
+		self.slots = list(KX_MeshBuilderSlot)
+
+	def addSlot(self, material : KX_BlenderMaterial, primitive : int) -> KX_MeshBuilderSlot:
+		"""
+		Add a KX_MeshBuilderSlot to this KX_MeshBuilder.
+
+		The primitive draw type for this Slot: 0 = TRIANGLES, 1 = POINTS, 2 = LINES
+		"""
+		...
+
+	def finish():
+		"""
+		Finalize it and convert it to KX_Mesh and it becomes usable for GameObjects.
+
+		Return type:
+		KX_Mesh
+		"""
+		return KX_MeshProxy
+	
+	def FromMesh(mesh : KX_MeshProxy, name : str):
+		"""
+		Create a KX_MeshBuilder from a mesh of an object.
+
+		Return type:
+		KX_MeshBuilder
+		"""
+		return KX_MeshBuilder
+	
 class KX_MeshProxy(SCA_IObject):
 	"""base class - SCA_IObject
 
