@@ -1,9 +1,13 @@
 # Change Log
 
-All notable changes to the "range-engine-api" extension will be documented in this file.
+## Release Notes
 
-Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
+### 0.1.2
 
-## [Unreleased]
+- Fix stubs not included.
+- Fix Problem with not initializing correctly.
+- Py -> Pyi stubs.
+
+### 0.1.0 | 0.1.1
 
 - Initial release

@@ -2,7 +2,7 @@
   "name": "range-engine-api",
   "displayName": "Range Engine API",
   "description": "Range Engine Autocompletion for Visual Studio Code",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "publisher": "RangeEngine",
   "icon": "images/icon.png",
   "engines": {
@@ -24,6 +24,14 @@
       }
     ]
   },
+  "files": [
+    "dist",
+    "LICENSE.md",
+
+    "images",
+
+    "src/stubs"
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/rangeengine/Range-Engine-VisualStudioCode-API"

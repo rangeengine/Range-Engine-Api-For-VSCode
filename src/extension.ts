@@ -10,27 +10,6 @@ export function activate(context: vscode.ExtensionContext) {
     vscode.workspace.onDidOpenTextDocument((document) => {
         handleDocument(document, context);
     });
-
-    // Event to monitor edits to the document
-    //vscode.workspace.onDidChangeTextDocument((event) => {
-    //    handleDocument(event.document, context);
-    //});
-
-    // For files already opened when activating the extension
-    vscode.workspace.textDocuments.forEach((document) => {
-        handleDocument(document, context);
-    });
-
-	// The command has been defined in the package.json file
-	// Now provide the implementation of the command with registerCommand
-	// The commandId parameter must match the command field in package.json
-	/*const disposable = vscode.commands.registerCommand('range-engine-api.helloWorld', () => {
-		// The code you place here will be executed every time your command is executed
-		// Display a message box to the user
-		vscode.window.showInformationMessage('Hello World from Range Engine API!');
-	});
-
-	context.subscriptions.push(disposable);*/
 }
 
 async function handleDocument(document: vscode.TextDocument, context: vscode.ExtensionContext) {
@@ -53,17 +32,16 @@ async function handleDocument(document: vscode.TextDocument, context: vscode.Ext
 }
 
 // This method is called when your extension is deactivated
-export async function deactivate() {
-    //console.log('Range Engine extension deactivated.');
+export function deactivate() {
+    vscode.window.showInformationMessage('Range Engine extension deactivated.');
 
-    const config = vscode.workspace.getConfiguration('python');
-    const extraPaths = config.get<string[]>('analysis.extraPaths') || [];
-    const stubsPath = path.join(__dirname, 'src/stubs');
+    const stubsPath = vscode.workspace.getConfiguration('python').get<string[]>('analysis.extraPaths') || [];
 
     // Remove path from stubs if it is set
-    if (extraPaths.includes(stubsPath)) {
-        const updatedPaths = extraPaths.filter((path) => path !== stubsPath);
-        await config.update('analysis.extraPaths', updatedPaths, vscode.ConfigurationTarget.Workspace);
-        vscode.window.showInformationMessage('Range Engine autocomplete disabled.');
-    }
+    const updatedPaths = stubsPath.filter((path) => !path.includes('src/stubs'));
+    vscode.workspace.getConfiguration('python').update(
+        'analysis.extraPaths',
+        updatedPaths,
+        vscode.ConfigurationTarget.Workspace
+    );
 }
